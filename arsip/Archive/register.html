@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DANLANAL FUN RUN | Pendaftaran</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a class="logo" href="index.html">DANLANAL FUN RUN</a>
+        <nav class="nav-links">
+          <a href="index.html">Beranda</a>
+          <a href="category.html">Kategori</a>
+          <a href="event-info.html">Info Event</a>
+          <a href="gallery.html">Galeri</a>
+          <a href="contact.html">Kontak</a>
+        </nav>
+        <button class="mobile-toggle" aria-label="Menu">
+          <span>☰</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="section soft">
+      <div class="container two-column">
+        <div class="fade" data-delay="0.1">
+          <div class="section-header" style="text-align:left;">
+            <h2>Pendaftaran Peserta</h2>
+            <p>Lengkapi data diri Anda untuk mengikuti DANLANAL Fun Run 5K.</p>
+          </div>
+          <form id="register-form">
+            <label>
+              Nama Lengkap
+              <input type="text" name="nama" required />
+            </label>
+            <label>
+              NIK
+              <input type="text" name="nik" maxlength="16" required />
+            </label>
+            <label>
+              Umur
+              <input type="number" name="umur" min="12" required />
+            </label>
+            <label>
+              Gender
+              <select name="gender" required>
+                <option value="">Pilih</option>
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
+            </label>
+            <label>
+              Nomor HP
+              <input type="tel" name="hp" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Alamat
+              <textarea name="alamat" rows="3" required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Submit Pendaftaran</button>
+          </form>
+        </div>
+
+        <aside class="card fade" data-delay="0.2">
+          <h3>Biaya Registrasi</h3>
+          <p class="price-tag">Rp250.000</p>
+          <p>Termasuk jersey, BIB, tas race pack, medali finisher, dan kupon refreshment.</p>
+          <a class="btn btn-outline" href="category.html">Lihat Detail Kategori</a>
+          <p style="margin-top:1.5rem;color:var(--text-muted);">Setelah submit, tim panitia akan mengirim detail pembayaran ke email Anda.</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© 2024 DANLANAL Fun Run.</p>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
+
