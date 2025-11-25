@@ -64,8 +64,13 @@ class ArchiveController extends Controller
      */
     public function asset(string $path): BinaryFileResponse
     {
-        // Support assets located either in repo root /assets or in arsip/Archive/assets
+        // Normalize path: remove leading slashes and handle directory traversal
+        $path = ltrim($path, '/\\');
+        $path = str_replace('..', '', $path); // Prevent directory traversal
+        
+        // Support assets located in public/assets (priority), repo root /assets, or arsip/Archive/assets
         $candidateBaseDirs = [
+            public_path('assets'), // Priority: check public/assets first (for landing CSS/JS)
             base_path('assets'),
             base_path('arsip/Archive/assets'),
         ];
@@ -76,7 +81,12 @@ class ArchiveController extends Controller
             if ($baseReal === false) {
                 continue;
             }
-            $fullPath = realpath($baseReal . DIRECTORY_SEPARATOR . $path);
+            
+            // Try both DIRECTORY_SEPARATOR and forward slash for cross-platform compatibility
+            $fullPath1 = realpath($baseReal . DIRECTORY_SEPARATOR . $path);
+            $fullPath2 = realpath($baseReal . '/' . $path);
+            $fullPath = $fullPath1 ?: $fullPath2;
+            
             if ($fullPath !== false && strpos($fullPath, $baseReal) === 0 && File::exists($fullPath)) {
                 $resolvedPath = $fullPath;
                 break;
@@ -84,7 +94,12 @@ class ArchiveController extends Controller
         }
 
         if (! $resolvedPath) {
-            abort(404);
+            // Log for debugging in production
+            \Log::warning('Asset not found', [
+                'path' => $path,
+                'searched_dirs' => $candidateBaseDirs,
+            ]);
+            abort(404, "Asset not found: {$path}");
         }
 
         $extension = pathinfo($resolvedPath, PATHINFO_EXTENSION);

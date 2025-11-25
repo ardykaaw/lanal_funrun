@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'event_name' => env('APP_EVENT_NAME', 'DANLANAL KENDARI RUN 2025'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +66,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Makassar', // WITA (Waktu Indonesia Tengah, UTC+8)
 
     /*
     |--------------------------------------------------------------------------

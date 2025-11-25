@@ -41,7 +41,7 @@ class RegistrationsExport
 
         // Header section
         $row = 5;
-        $sheet->setCellValue('A' . $row, 'DATA PESERTA DANLANAL KENDARI FUN RUN 2025');
+        $sheet->setCellValue('A' . $row, 'DATA PESERTA DANLANAL KENDARI RUN 2025');
         $sheet->mergeCells('A' . $row . ':P' . $row);
         $sheet->getStyle('A' . $row)->applyFromArray([
             'font' => [
@@ -67,8 +67,8 @@ class RegistrationsExport
         $row += 2;
         $headers = [
             'No', 'No. Pendaftaran', 'Nama Depan', 'Nama Belakang', 'Nama di BIB',
-            'Email', 'Telepon', 'Tempat Lahir', 'Tanggal Lahir', 'Jenis Kelamin',
-            'Pekerjaan', 'Jenis Identitas', 'Nomor Identitas', 'Alamat', 'Kota',
+            'Email', 'Telepon / WA', 'Tempat Lahir', 'Tanggal Lahir', 'Jenis Kelamin',
+            'Pekerjaan', 'Jenis Identitas', 'Nomor Identitas', 'Alamat', 'Kota', 'Provinsi',
             'Ukuran Jersey', 'Golongan Darah', 'Kategori', 'Status', 'Status Pembayaran',
             'Nama Kontak Darurat', 'Telepon Kontak Darurat', 'Komunitas', 'Catatan Medis', 'Tanggal Daftar'
         ];
@@ -102,7 +102,7 @@ class RegistrationsExport
         }
 
         // Set column widths
-        $widths = [5, 15, 15, 15, 12, 25, 15, 15, 12, 12, 15, 12, 15, 30, 15, 10, 10, 15, 12, 15, 20, 15, 20, 30, 18];
+        $widths = [5, 15, 15, 15, 12, 25, 18, 15, 12, 12, 15, 12, 15, 30, 15, 15, 10, 10, 15, 12, 15, 20, 15, 20, 30, 18];
         $col = 'A';
         foreach ($widths as $width) {
             $sheet->getColumnDimension($col)->setWidth($width);
@@ -132,6 +132,7 @@ class RegistrationsExport
                 $registration->id_number,
                 $registration->address,
                 $registration->city,
+                $registration->province ?? '-',
                 $registration->jersey_size,
                 $registration->blood_type,
                 $registration->category,
@@ -165,7 +166,7 @@ class RegistrationsExport
 
             // Alternate row colors
             if ($row % 2 == 0) {
-                $sheet->getStyle('A' . $row . ':Y' . $row)->applyFromArray([
+                $sheet->getStyle('A' . $row . ':Z' . $row)->applyFromArray([
                     'fill' => [
                         'fillType' => Fill::FILL_SOLID,
                         'startColor' => ['rgb' => 'E2F4FF'],
@@ -198,7 +199,7 @@ class RegistrationsExport
             try {
                 $drawing = new Drawing();
                 $drawing->setName('Logo Event');
-                $drawing->setDescription('DANLANAL Fun Run Logo');
+                $drawing->setDescription('DANLANAL KENDARI RUN 2025 Logo');
                 $drawing->setPath($logoEventPath);
                 $drawing->setHeight(60);
                 $drawing->setCoordinates('A1');

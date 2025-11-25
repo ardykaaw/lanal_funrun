@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Nomor Telepon</label>
+                                        <label class="form-label">Nomor Telepon / WhatsApp</label>
                                         <div class="form-control-plaintext">{{ $registration->phone }}</div>
                                     </div>
                                 </div>
@@ -118,6 +118,12 @@
                                 <label class="form-label">Kota</label>
                                 <div class="form-control-plaintext">{{ $registration->city }}</div>
                             </div>
+                            @if($registration->province)
+                                <div class="mb-3">
+                                    <label class="form-label">Provinsi</label>
+                                    <div class="form-control-plaintext">{{ $registration->province }}</div>
+                                </div>
+                            @endif
 
                             <hr>
 
@@ -181,7 +187,11 @@
                                 <h3 class="card-title">Bukti Pembayaran</h3>
                             </div>
                             <div class="card-body">
-                                <img src="{{ Storage::url($registration->payment_proof_path) }}" alt="Bukti Pembayaran" class="img-fluid rounded" style="max-height: 500px;">
+                                @php($proofUrl = route('admin.registrations.payment-proof', $registration))
+                                <img src="{{ $proofUrl }}" alt="Bukti Pembayaran" class="img-fluid rounded mb-3" style="max-height: 500px;">
+                                <a href="{{ $proofUrl }}" target="_blank" rel="noopener" class="btn btn-outline-primary w-100">
+                                    Lihat / Unduh Bukti
+                                </a>
                             </div>
                         </div>
                     @endif

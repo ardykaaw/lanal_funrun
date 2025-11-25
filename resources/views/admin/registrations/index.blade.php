@@ -72,16 +72,6 @@
                     </div>
                     <div class="card-actions">
                         <div class="d-flex flex-wrap gap-2 align-items-center">
-                            <a href="{{ route('admin.registrations.export', request()->query()) }}" class="btn btn-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon me-2">
-                                    <path d="M21 15v4a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-4" />
-                                    <path d="M7 10l5 5l5 -5" />
-                                    <path d="M12 15v-12" />
-                                </svg>
-                                Export Excel
-                            </a>
                             <form action="{{ route('admin.registrations.index') }}" method="GET" class="row g-2 align-items-center">
                                 <div class="col-auto">
                                     <input type="search"
@@ -120,7 +110,8 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th>Phone</th>
+                                <th>Telepon / WA</th>
+                                <th>Domisili</th>
                                 <th>Kategori</th>
                                 <th>Status</th>
                                 <th>Pembayaran</th>
@@ -145,6 +136,10 @@
                                     </td>
                                     <td class="text-muted">{{ $registration->email }}</td>
                                     <td class="text-muted">{{ $registration->phone }}</td>
+                                    <td>
+                                        <div class="fw-semibold">{{ $registration->city ?? '-' }}</div>
+                                        <div class="text-muted text-xs">{{ $registration->province ?? 'Provinsi belum diisi' }}</div>
+                                    </td>
                                     <td><span class="badge bg-primary text-white">{{ $registration->category }}</span></td>
                                     <td>
                                         @if($registration->status === 'approved')

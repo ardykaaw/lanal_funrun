@@ -9,9 +9,9 @@
         Profil
     </span>
 </a>
-<form action="{{ route('logout') }}" method="post">
+<form action="{{ route('logout') }}" method="post" class="mb-0">
     @csrf
-    <button type="submit" class="dropdown-item">
+    <button type="submit" class="dropdown-item w-100 text-start border-0 bg-transparent" style="cursor: pointer; display: flex; align-items: center;">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="icon icon-tabler icons-tabler-outline icon-tabler-logout">

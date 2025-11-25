@@ -103,7 +103,8 @@
                                         <th>No. Pendaftaran</th>
                                         <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Telepon</th>
+                                        <th>Telepon / WA</th>
+                                        <th>Domisili</th>
                                         <th>Kategori</th>
                                         <th>Tanggal Disetujui</th>
                                         <th class="w-1">Aksi</th>
@@ -133,6 +134,10 @@
                                             </td>
                                             <td class="text-muted">
                                                 {{ $participant->phone }}
+                                            </td>
+                                            <td>
+                                                <div class="fw-semibold">{{ $participant->city ?? '-' }}</div>
+                                                <div class="text-muted small">{{ $participant->province ?? 'Provinsi belum diisi' }}</div>
                                             </td>
                                             <td>
                                                 <span class="badge bg-primary text-white">{{ $participant->category }}</span>

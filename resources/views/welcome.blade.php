@@ -11,7 +11,7 @@
                         Dashboard
                     </div>
                     <h2 class="page-title">
-                        DANLANAL Fun Run 2025
+                        DANLANAL KENDARI RUN 2025
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="text-white">
                                             <h2 class="mb-1 text-white">Selamat Datang, {{ Auth::check() ? Auth::user()->name : 'Admin' }}!</h2>
-                                            <p class="text-white-50 mb-0">Kelola event DANLANAL Fun Run 2025 dengan mudah dari dashboard ini.</p>
+                                            <p class="text-white-50 mb-0">Kelola event DANLANAL KENDARI RUN 2025 dengan mudah dari dashboard ini.</p>
                                             <div class="mt-2">
                                                 <span class="badge bg-white text-primary">21 Desember 2025</span>
                                                 <span class="badge bg-white text-primary ms-2">Kategori: Umum</span>

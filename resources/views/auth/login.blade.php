@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Login - DANLANAL Fun Run 2025</title>
+    <title>Login - DANLANAL KENDARI RUN 2025</title>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/admin.css') }}" rel="stylesheet" />
     <style>
@@ -125,11 +125,11 @@
                                 <div style="display: inline-block; margin-bottom: 16px;">
                                     <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" 
                                      class="navbar-brand-image" 
-                                     alt="DANLANAL Fun Run 2025 Logo"
+                                     alt="DANLANAL KENDARI RUN 2025 Logo"
                                          style="max-height: 80px; width: auto; display: block;">
                                 </div>
                                 <h1 class="m-0 mt-2" style="font-size: 1.25rem; font-weight: 700;">
-                                    DANLANAL Fun Run 2025
+                                    DANLANAL KENDARI RUN 2025
                                 </h1>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Registration;
 use App\Services\WhatsAppService;
+use App\Services\BarcodeService;
 use App\Exports\RegistrationsExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationApprovedMail;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Support\Facades\File;
 
 class RegistrationController extends Controller
 {
@@ -68,9 +70,19 @@ class RegistrationController extends Controller
             'admin_notes' => 'nullable|string|max:1000',
         ]);
 
-        // Generate registration number if not exists
-        if (!$registration->registration_number) {
+        // Generate registration number if not exists or if it's old format
+        // New format: DNL5001, DNL5002, etc. (DNL5 followed by 3+ digits)
+        if (!$registration->registration_number || 
+            !preg_match('/^DNL5\d{3,}$/', $registration->registration_number)) {
+            // Check if it's old format (DNL2025xxxxx) or doesn't exist
             $registration->registration_number = Registration::generateRegistrationNumber();
+        }
+
+        // Generate barcode if not exists
+        if (!$registration->barcode) {
+            $barcodeService = new BarcodeService();
+            $barcodePath = $barcodeService->generateBarcode($registration->registration_number);
+            $registration->barcode = $barcodePath;
         }
 
         $registration->update([
@@ -79,6 +91,7 @@ class RegistrationController extends Controller
             'admin_notes' => $request->admin_notes,
             'approved_at' => now(),
             'rejected_at' => null,
+            'barcode' => $registration->barcode,
         ]);
 
         // Send Email notification (automatic)
@@ -144,7 +157,8 @@ class RegistrationController extends Controller
         $export = new RegistrationsExport($registrations);
         $spreadsheet = $export->export();
 
-        $filename = 'Data_Peserta_DANLANAL_Fun_Run_' . date('Y-m-d_His') . '.xlsx';
+        $eventSlug = 'danlanal_kendari_run_2025';
+        $filename = 'Data_Peserta_' . $eventSlug . '_' . date('Y-m-d_His') . '.xlsx';
 
         return new StreamedResponse(function() use ($spreadsheet, $filename) {
             $writer = new Xlsx($spreadsheet);
@@ -160,8 +174,10 @@ class RegistrationController extends Controller
     {
         $whatsappService = new WhatsAppService();
 
+        $eventName = 'DANLANAL KENDARI RUN 2025';
+
         $message = "Halo {$registration->first_name},\n\n";
-        $message .= "Pendaftaran Anda untuk *DANLANAL Kendari Fun Run 2025* telah dikonfirmasi!\n\n";
+        $message .= "Pendaftaran Anda untuk *{$eventName}* telah dikonfirmasi!\n\n";
         $message .= "📋 *Nomor Pendaftaran:* {$registration->registration_number}\n";
         $message .= "👤 *Nama:* {$registration->full_name}\n";
         $message .= "🏃 *Kategori:* {$registration->category}\n";
@@ -172,5 +188,22 @@ class RegistrationController extends Controller
 
         // Send message via WhatsApp service
         return $whatsappService->sendMessage($registration->phone, $message);
+    }
+
+    public function paymentProof(Registration $registration)
+    {
+        abort_if(! $registration->payment_proof_path, 404);
+
+        $path = storage_path('app/public/' . $registration->payment_proof_path);
+        if (! File::exists($path)) {
+            abort(404);
+        }
+
+        $mimeType = File::mimeType($path) ?: 'application/octet-stream';
+
+        return response()->file($path, [
+            'Content-Type' => $mimeType,
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
     }
 }

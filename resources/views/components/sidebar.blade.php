@@ -8,10 +8,10 @@
         <div class="navbar-nav flex-row d-lg-none">
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
-                    aria-label="Open user menu">
-                    <div class="avatar  bg-cyan-lt" data-demo-color="">CH</div>
+                    aria-expanded="false" aria-haspopup="true" aria-label="Open user menu">
+                    <div class="avatar bg-cyan-lt" data-demo-color="">{{ Auth::check() ? Str::substr(Auth::user()->name, 0, 2) : 'CH' }}</div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end">
+                <div class="dropdown-menu dropdown-menu-end" id="mobile-user-dropdown">
                     @include('components.profil-menu')
                 </div>
             </div>

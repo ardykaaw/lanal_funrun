@@ -1,220 +1,203 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cek Status Pendaftaran - DANLANAL Kendari Fun Run 2025</title>
-    <meta name="description" content="Cek status dan detail pendaftaran DANLANAL Kendari Fun Run 2025 menggunakan nomor pendaftaran.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="{{ url('/assets/lanal/logo-event/Logg4.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ url('/assets/style.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DANLANAL KENDARI RUN 2025 | Cek Status</title>
+    <link rel="icon" href="{{ asset('assets/lanal/logo-event/Logg4.png') }}" type="image/png" />
+    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}?v=2.0" />
     <style>
-      /* Remove background and border effects from logo-wrapper */
-      .logo-wrapper[style*="background: transparent"]::before {
-        display: none !important;
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+      }
+      .status-pill.approved {
+        background: rgba(46, 204, 113, 0.15);
+        color: #1e8748;
+      }
+      .status-pill.pending {
+        background: rgba(255, 165, 0, 0.15);
+        color: #b06b00;
+      }
+      .status-pill.rejected {
+        background: rgba(255, 99, 71, 0.15);
+        color: #b21807;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+      }
+      .info-grid div {
+        padding: 0.85rem;
+        border: 1px solid rgba(0, 59, 115, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.6);
+      }
+      .info-grid p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+      .alert {
+        margin-top: 1.25rem;
+        border-radius: 16px;
+        padding: 1rem 1.2rem;
+        font-weight: 600;
+      }
+      .alert.success {
+        background: rgba(46, 204, 113, 0.12);
+        color: #1e8748;
+      }
+      .alert.warning {
+        background: rgba(255, 165, 0, 0.12);
+        color: #b06b00;
+      }
+      .alert.danger {
+        background: rgba(255, 99, 71, 0.12);
+        color: #b21807;
+      }
+      .cta-center {
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .card.danger {
+        border: 1px solid rgba(255, 99, 71, 0.35);
       }
     </style>
   </head>
   <body>
-    <header class="site-header sub">
-      <div class="container header-inner">
-        <a href="/" class="brand">
-          <div class="logo-wrapper" style="background: transparent; padding: 0; border: none; animation: none;">
-            <img src="{{ url('/assets/lanal/logo-event/Logg4.png') }}" alt="DANLANAL Kendari Fun Run Logo" class="brand-logo" width="40" height="40" style="filter: none;">
-          </div>
-          <span class="brand-name">DANLANAL Kendari Fun Run 2025</span>
+    <header>
+      <div class="container nav">
+        <a class="logo" href="/">
+          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL KENDARI RUN 2025" />
+          <span class="text-label">DANLANAL KENDARI RUN 2025</span>
         </a>
-        <button class="burger-menu" id="burgerMenu" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div class="nav-overlay" id="navOverlay"></div>
-        <nav class="nav" id="mainNav">
-          <a href="/" onclick="closeMobileMenu()">Beranda</a>
+        <nav class="nav-links">
+          <a href="/">Beranda</a>
+          <a href="{{ route('archive.event-info') }}">Informasi Lomba</a>
+          <a href="{{ route('archive.contact') }}">Kontak</a>
+          <a class="btn btn-primary" href="{{ route('archive.register') }}">Daftar</a>
         </nav>
+        <button class="mobile-toggle" aria-label="Menu">
+          <span>☰</span>
+        </button>
       </div>
     </header>
 
-    <main>
-      <section class="section">
-        <div class="container narrow">
-          <h1 style="text-align: center; margin-bottom: 8px;">Cek Status Pendaftaran</h1>
-          <p class="muted" style="text-align: center; margin-bottom: 32px;">Masukkan nomor pendaftaran Anda untuk melihat detail lengkap</p>
+    <main class="section soft">
+      <div class="container narrow">
+        <div class="section-header" style="text-align:center;">
+          <h2>Cek Status Pendaftaran</h2>
+          <p>Masukkan nomor pendaftaran</p>
+        </div>
 
-          <div class="card">
-            <form action="{{ route('registration.check') }}" method="GET" class="form">
-              <div class="field">
-                <label for="registration_number">Nomor Pendaftaran</label>
-                <input 
-                  type="text" 
-                  id="registration_number" 
-                  name="registration_number" 
-                  placeholder="Contoh: FR202512345" 
-                  required
-                  value="{{ request('registration_number') }}"
-                  style="text-transform: uppercase;"
-                >
-                <small class="muted">Masukkan nomor pendaftaran yang Anda terima via email</small>
-              </div>
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Cek Status</button>
-                <a href="/" class="btn btn-ghost">Kembali</a>
-              </div>
-            </form>
-          </div>
+        <div class="card fade" data-delay="0.1">
+          <form class="form" action="{{ route('registration.check') }}" method="GET">
+            <label>
+              Nomor Pendaftaran
+              <input
+                type="text"
+                name="registration_number"
+                placeholder="Contoh: DNL202501234"
+                required
+                value="{{ request('registration_number') }}"
+                style="text-transform:uppercase;"
+              />
+              <span class="muted" style="font-size:0.85rem;">Nomor dapat ditemukan di email konfirmasi pendaftaran</span>
+            </label>
+            <div class="form-grid">
+              <button class="btn btn-primary" type="submit">Cek Status</button>
+              <a class="btn btn-outline" href="{{ route('archive.register') }}">Kembali Daftar</a>
+            </div>
+          </form>
+        </div>
 
-          @if($registration)
-            <div class="card" style="margin-top: 24px;">
-              <div style="text-align: center; margin-bottom: 24px;">
-                @if($registration->status === 'approved')
-                  <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: linear-gradient(135deg, var(--ok), #5be588); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; color: #0b0f1a; font-weight: 900;">
-                    ✓
-                  </div>
-                  <h2 style="color: var(--ok); margin-bottom: 8px;">Pendaftaran Disetujui!</h2>
-                @elseif($registration->status === 'rejected')
-                  <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: linear-gradient(135deg, var(--danger), #ff5252); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; color: white; font-weight: 900;">
-                    ✗
-                  </div>
-                  <h2 style="color: var(--danger); margin-bottom: 8px;">Pendaftaran Ditolak</h2>
-                @else
-                  <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: rgba(255,165,0,.2); border: 3px solid var(--warning); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; color: var(--warning); font-weight: 900;">
-                    ⏳
-                  </div>
-                  <h2 style="color: var(--warning); margin-bottom: 8px;">Menunggu Konfirmasi</h2>
-                @endif
-              </div>
-
-              <div style="background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
-                <h3 style="margin-bottom: 16px; color: var(--text);">Informasi Pendaftaran</h3>
-                <div style="display: grid; gap: 12px;">
-                  <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
-                    <span class="muted">Nomor Pendaftaran:</span>
-                    <strong>{{ $registration->registration_number ?? 'Belum Tersedia' }}</strong>
-                  </div>
-                  <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
-                    <span class="muted">Nama:</span>
-                    <strong>{{ $registration->full_name }}</strong>
-                  </div>
-                  <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
-                    <span class="muted">Email:</span>
-                    <strong>{{ $registration->email }}</strong>
-                  </div>
-                  <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
-                    <span class="muted">Kategori:</span>
-                    <strong>{{ $registration->category }}</strong>
-                  </div>
-                  <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
-                    <span class="muted">Status:</span>
-                    @if($registration->status === 'approved')
-                      <span style="background: rgba(122,242,155,.2); color: var(--ok); padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600;">Disetujui</span>
-                    @elseif($registration->status === 'rejected')
-                      <span style="background: rgba(255,107,107,.2); color: var(--danger); padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600;">Ditolak</span>
-                    @else
-                      <span style="background: rgba(255,165,0,.2); color: var(--warning); padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 600;">Menunggu</span>
-                    @endif
-                  </div>
-                  <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                    <span class="muted">Tanggal Pendaftaran:</span>
-                    <strong>{{ $registration->created_at->format('d F Y') }}</strong>
-                  </div>
-                </div>
-              </div>
-
+        @if($registration)
+          <div class="card fade" data-delay="0.2" style="margin-top:1.5rem;">
+            <div class="status-pill {{ $registration->status }}">
               @if($registration->status === 'approved')
-                <div style="background: rgba(124,107,255,.1); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                  <p style="margin: 0; color: var(--text); font-size: 15px; line-height: 1.6;">
-                    <strong>🎉 Selamat!</strong><br>
-                    Pendaftaran Anda telah dikonfirmasi. Silahkan cek detail lengkap di bawah ini untuk informasi lebih lanjut.
-                  </p>
-                </div>
-                <div style="text-align: center;">
-                  <a href="{{ route('registration.show', $registration->registration_number) }}" class="btn btn-primary">
-                    Lihat Detail Lengkap
-                  </a>
-                </div>
-              @elseif($registration->status === 'rejected' && $registration->admin_notes)
-                <div style="background: rgba(255,107,107,.1); border: 1px solid var(--danger); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                  <p style="margin: 0; color: var(--text); font-size: 15px; line-height: 1.6;">
-                    <strong>Alasan Penolakan:</strong><br>
-                    {{ $registration->admin_notes }}
-                  </p>
-                </div>
-              @elseif($registration->status === 'pending')
-                <div style="background: rgba(255,165,0,.1); border: 1px solid var(--warning); border-radius: 12px; padding: 20px;">
-                  <p style="margin: 0; color: var(--text); font-size: 15px; line-height: 1.6;">
-                    <strong>⏳ Mohon Tunggu</strong><br>
-                    Pendaftaran Anda sedang dalam proses peninjauan oleh admin. Anda akan menerima notifikasi via email setelah pendaftaran dikonfirmasi.
-                  </p>
+                ✅ Pendaftaran Disetujui
+              @elseif($registration->status === 'rejected')
+                ❌ Pendaftaran Ditolak
+              @else
+                ⏳ Menunggu Konfirmasi
+              @endif
+            </div>
+
+            <div class="info-grid">
+              <div>
+                <p>Nomor Pendaftaran</p>
+                <strong>{{ $registration->registration_number ?? 'Belum tersedia' }}</strong>
+              </div>
+              <div>
+                <p>Nama Lengkap</p>
+                <strong>{{ $registration->full_name }}</strong>
+              </div>
+              <div>
+                <p>Email</p>
+                <strong>{{ $registration->email }}</strong>
+              </div>
+              <div>
+                <p>Kategori</p>
+                <span class="badge bg-primary text-white">{{ $registration->category }}</span>
+              </div>
+              <div>
+                <p>Tanggal Daftar</p>
+                <strong>{{ $registration->created_at->format('d F Y') }}</strong>
+              </div>
+              <div>
+                <p>Status Pembayaran</p>
+                <span class="badge {{ $registration->payment_status === 'verified' ? 'bg-success' : ($registration->payment_status === 'rejected' ? 'bg-danger' : 'bg-warning') }} text-white">
+                  {{ ucfirst($registration->payment_status) }}
+                </span>
+              </div>
+              @if($registration->province)
+                <div>
+                  <p>Provinsi</p>
+                  <strong>{{ $registration->province }}</strong>
                 </div>
               @endif
             </div>
-          @elseif(request('registration_number'))
-            <div class="card" style="margin-top: 24px; background: rgba(255,107,107,.1); border: 1px solid var(--danger);">
-              <div style="text-align: center; padding: 24px;">
-                <div style="font-size: 48px; margin-bottom: 16px;">❌</div>
-                <h3 style="color: var(--danger); margin-bottom: 8px;">Nomor Pendaftaran Tidak Ditemukan</h3>
-                <p class="muted">Pastikan nomor pendaftaran yang Anda masukkan sudah benar.</p>
+
+            @if($registration->status === 'approved')
+              <div class="alert success">
+                 Selamat! Pendaftaran Anda telah diverifikasi. Silakan cek email untuk informasi dan instruksi lanjutan.
+              </div>
+              <div class="cta-center">
+                <a class="btn btn-primary" href="{{ route('registration.show', $registration->registration_number) }}">Lihat Detail Pendaftaran</a>
+              </div>
+            @elseif($registration->status === 'rejected' && $registration->admin_notes)
+              <div class="alert danger">
+                <strong>Alasan Penolakan:</strong><br />
+                {{ $registration->admin_notes }}
+              </div>
+            @else
+              <div class="alert warning">
+                ⏳ Mohon tunggu; tim admin sedang meninjau berkas Anda. Anda akan menerima email begitu status diperbarui.
+              </div>
+            @endif
+          </div>
+        @elseif(request('registration_number'))
+            <div class="card fade danger" style="margin-top:1.5rem;">
+              <div class="alert danger">
+                ❌ Nomor pendaftaran tidak ditemukan. Periksa kembali format DNLxxxx atau hubungi panitia untuk bantuan.
               </div>
             </div>
-          @endif
-        </div>
-      </section>
+        @endif
+      </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <div class="logo-wrapper footer-logo-wrapper" style="background: transparent; padding: 0; border: none; animation: none;">
-            <img src="{{ url('/assets/lanal/logo-event/Logg4.png') }}" alt="DANLANAL Kendari Fun Run" width="28" height="28" class="footer-logo" style="filter: none;">
-          </div>
-          <span>DANLANAL Kendari Fun Run 2025</span>
-        </div>
-        <div class="footer-links">
-          <a href="/">Beranda</a>
-          <a href="{{ url('/event/register') }}" class="btn btn-sm">Daftar</a>
-        </div>
+    <footer>
+      <div class="container">
+        <p>© {{ date('Y') }} DANLANAL KENDARI RUN 2025. Semua hak cipta.</p>
       </div>
     </footer>
-
-    <script src="{{ url('/assets/script.js') }}" defer></script>
-    <script>
-      // Burger Menu Toggle
-      const burgerMenu = document.getElementById('burgerMenu');
-      const mainNav = document.getElementById('mainNav');
-      const navOverlay = document.getElementById('navOverlay');
-      
-      function toggleMenu() {
-        const isActive = burgerMenu.classList.contains('active');
-        burgerMenu.classList.toggle('active');
-        mainNav.classList.toggle('active');
-        if (navOverlay) {
-          navOverlay.classList.toggle('active');
-        }
-        burgerMenu.setAttribute('aria-expanded', !isActive);
-        document.body.style.overflow = !isActive ? 'hidden' : '';
-      }
-      
-      function closeMobileMenu() {
-        burgerMenu.classList.remove('active');
-        mainNav.classList.remove('active');
-        if (navOverlay) {
-          navOverlay.classList.remove('active');
-        }
-        burgerMenu.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-      
-      if (burgerMenu) {
-        burgerMenu.addEventListener('click', toggleMenu);
-      }
-      
-      if (navOverlay) {
-        navOverlay.addEventListener('click', closeMobileMenu);
-      }
-    </script>
+    <script src="{{ asset('assets/landing/script.js') }}" defer></script>
   </body>
 </html>
-

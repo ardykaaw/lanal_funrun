@@ -3,22 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DANLANAL FUN RUN | Galeri</title>
+    <title>DANLANAL KENDARI RUN 2025 | Galeri</title>
     <link rel="icon" href="{{ asset('assets/lanal/logo-event/Logg4.png') }}" type="image/png" />
-    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}?v=2.0" />
   </head>
   <body>
     <header>
       <div class="container nav">
         <a class="logo" href="/">
-          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL Fun Run" />
-          <span class="text-label">DANLANAL Fun Run</span>
+          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL KENDARI RUN 2025" />
+          <span class="text-label">DANLANAL KENDARI RUN 2025</span>
         </a>
         <nav class="nav-links">
           <a href="/">Beranda</a>
-          <a href="{{ route('archive.category') }}">Kategori</a>
-          <a href="{{ route('archive.event-info') }}">Info Event</a>
-          <a href="{{ route('archive.gallery') }}">Galeri</a>
+          <a href="{{ route('archive.event-info') }}">Informasi Lomba</a>
           <a href="{{ route('archive.contact') }}">Kontak</a>
           <a class="btn btn-primary" href="{{ route('archive.register') }}">Daftar</a>
         </nav>
@@ -32,7 +30,7 @@
     <main class="section soft">
       <div class="container">
         <div class="section-header fade" data-delay="0.1">
-          <h2>Galeri DANLANAL Fun Run</h2>
+          <h2>Galeri DANLANAL KENDARI RUN 2025</h2>
           <p>Tangkapan momen terbaik dari pesisir, latihan, dan komunitas pelari.</p>
         </div>
         <div class="gallery-grid fade" data-delay="0.2">
@@ -48,7 +46,7 @@
 
     <footer>
       <div class="container">
-        <p>© {{ date('Y') }} DANLANAL Fun Run.</p>
+        <p>© {{ date('Y') }} DANLANAL KENDARI RUN 2025.</p>
       </div>
     </footer>
     <script src="{{ asset('assets/landing/script.js') }}" defer></script>

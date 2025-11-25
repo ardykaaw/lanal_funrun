@@ -3,23 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DANLANAL FUN RUN | Pendaftaran</title>
+    <title>DANLANAL KENDARI RUN 2025 | Pendaftaran</title>
     <link rel="icon" href="{{ asset('assets/lanal/logo-event/Logg4.png') }}" type="image/png" />
-    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}?v=2.0" />
   </head>
   <body>
     <header>
       <div class="container nav">
         <a class="logo" href="/">
-          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL Fun Run" />
-          <span class="text-label">DANLANAL Fun Run</span>
+          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL KENDARI RUN 2025" />
+          <span class="text-label">DANLANAL KENDARI RUN 2025</span>
         </a>
         <nav class="nav-links">
           <a href="/">Beranda</a>
-          <a href="{{ route('archive.category') }}">Kategori</a>
-          <a href="{{ route('archive.event-info') }}">Info Event</a>
-          <a href="{{ route('archive.gallery') }}">Galeri</a>
+          <a href="{{ route('archive.event-info') }}">Informasi Lomba</a>
           <a href="{{ route('archive.contact') }}">Kontak</a>
+          <a class="btn btn-primary" href="{{ route('archive.register') }}">Daftar</a>
         </nav>
         <button class="mobile-toggle" aria-label="Menu">
           <span>☰</span>
@@ -30,10 +29,10 @@
 
     <main class="section soft">
       <div class="container two-column">
-        <div class="fade" data-delay="0.1">
+        <div>
           <div class="section-header" style="text-align:left;">
             <h2>Pendaftaran Peserta</h2>
-            <p>Lengkapi data diri Anda untuk mengikuti DANLANAL Fun Run 5K.</p>
+              <p>Lengkapi data diri Anda untuk mengikuti DANLANAL KENDARI RUN 2025.</p>
           </div>
           <form id="register-form" action="{{ route('registration.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -44,13 +43,9 @@
                   <option value="5K - Kategori Umum" selected>5K - Kategori Umum</option>
                 </select>
               </label>
-              <label>
-                Nama Depan
-                <input type="text" name="firstName" required />
-              </label>
-              <label>
-                Nama Belakang
-                <input type="text" name="lastName" required />
+              <label class="full-width">
+                Nama Lengkap
+                <input type="text" name="fullName" required placeholder="Tuliskan nama lengkap" />
               </label>
               <label>
                 Email
@@ -61,7 +56,7 @@
                 <input type="text" name="bibName" maxlength="16" required />
               </label>
               <label>
-                Nomor Telepon
+                  Nomor Telepon / WhatsApp
                 <input type="tel" name="phone" required />
               </label>
             </div>
@@ -113,6 +108,10 @@
                 Kota
                 <input type="text" name="city" required />
               </label>
+                <label>
+                  Provinsi
+                  <input type="text" name="province" required />
+              </label>
               <label>
                 Ukuran Jersey
                 <select name="jerseySize" required>
@@ -155,41 +154,21 @@
                 <input type="text" name="community" />
               </label>
               <label>
-                Catatan Medis
-                <textarea name="medicalNotes" rows="3" placeholder="Tuliskan kondisi atau alergi khusus"></textarea>
+                Catatan Medis 
+                <textarea name="medicalNotes" rows="3" placeholder="Tuliskan kondisi kesehatan"></textarea>
               </label>
             </div>
 
             <div class="card">
               <h3>Konfirmasi Pembayaran</h3>
               <p class="muted">Lakukan pembayaran Rp250.000 ke rekening berikut dan unggah bukti pembayaran.</p>
-              <p style="font-weight:700;">BRI · 183901005388536 a.n. Eka SriWahyuni</p>
-            </div>
-
-            <div class="payment-type-section">
-              <label class="payment-type-label">Jenis Pembayaran</label>
-              <div class="payment-type-grid">
-                <label class="payment-type-option">
-                  <input type="radio" name="paymentType" value="cash" required />
-                  <span>Tunai</span>
-                </label>
-                <label class="payment-type-option">
-                  <input type="radio" name="paymentType" value="transfer" required />
-                  <span>Transfer</span>
-                </label>
-              </div>
-              <p class="payment-instruction muted">*Silahkan centang untuk jenis pembayaran yang digunakan</p>
-              <p class="payment-instruction muted">*Screenshot Bukti transfer dan kirim ke NO : 0809</p>
+              <p style="font-weight:700;">Mandiri · 0310055511144
+                a.n. Endro Pamungkas</p>
             </div>
 
             <label>
               Bukti Pembayaran (JPG/PNG/PDF)
               <input type="file" name="paymentProof" accept="image/*,.pdf" required />
-            </label>
-
-            <label>
-              Catatan untuk Panitia
-              <textarea name="adminNotes" rows="2" placeholder="Opsional"></textarea>
             </label>
 
             <div class="checkbox-wrapper">
@@ -203,19 +182,23 @@
           </form>
         </div>
 
-        <aside class="card fade" data-delay="0.2">
+        <aside class="card">
           <h3>Biaya Registrasi</h3>
           <p class="price-tag">Rp250.000</p>
-          <p>Termasuk jersey, BIB, tas race pack, medali finisher, dan kupon refreshment.</p>
-          <a class="btn btn-outline" href="{{ route('archive.category') }}">Lihat Detail Kategori</a>
-          <p style="margin-top:1.5rem;color:var(--text-muted);">Setelah submit, tim panitia akan mengirim detail pembayaran ke email Anda.</p>
+            <p>Termasuk Jersey, BIB, Totebag, Medali Finisher, Refreshment, dan Kupon Doorprize.</p>
+            
+          <div class="size-chart-card">
+            <h4>Panduan Ukuran Jersey</h4>
+            <img src="{{ asset('assets/lanal/Size-Chart.jpg') }}" alt="Size chart DANLANAL KENDARI RUN 2025" loading="lazy" />
+            <p class="muted">Gunakan panduan ukuran untuk memilih jersey yang paling nyaman.</p>
+          </div>
         </aside>
       </div>
     </main>
 
     <footer>
       <div class="container">
-        <p>© {{ date('Y') }} DANLANAL Fun Run.</p>
+        <p>© {{ date('Y') }} DANLANAL KENDARI RUN 2025.</p>
       </div>
     </footer>
     <script src="{{ asset('assets/landing/script.js') }}" defer></script>

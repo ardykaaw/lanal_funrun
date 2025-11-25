@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pendaftaran Ditutup - DANLANAL Kendari Fun Run 2025</title>
-    <meta name="description" content="Pendaftaran untuk DANLANAL Kendari Fun Run 2025 saat ini sudah ditutup.">
+    <title>Pendaftaran Ditutup - DANLANAL KENDARI RUN 2025</title>
+    <meta name="description" content="Pendaftaran untuk DANLANAL KENDARI RUN 2025 saat ini sudah ditutup.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ url('/assets/lanal/logo-event/Logg4.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}?v=2.0">
     <style>
       /* Remove background and border effects from logo-wrapper */
       .logo-wrapper[style*="background: transparent"]::before {
@@ -21,15 +21,14 @@
     <header>
       <div class="container nav">
         <a class="logo" href="/">
-          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL Fun Run" />
-          <span class="text-label">DANLANAL Fun Run</span>
+          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL KENDARI RUN 2025" />
+          <span class="text-label">DANLANAL KENDARI RUN 2025</span>
         </a>
         <nav class="nav-links">
           <a href="/">Beranda</a>
-          <a href="{{ route('archive.category') }}">Kategori</a>
-          <a href="{{ route('archive.event-info') }}">Info Event</a>
-          <a href="{{ route('archive.gallery') }}">Galeri</a>
+          <a href="{{ route('archive.event-info') }}">Informasi Lomba</a>
           <a href="{{ route('archive.contact') }}">Kontak</a>
+          <a class="btn btn-primary" href="{{ route('archive.register') }}">Daftar</a>
         </nav>
         <button class="mobile-toggle" aria-label="Menu">
           <span>☰</span>
@@ -46,7 +45,7 @@
             </div>
             <h1 style="margin-bottom: 1rem; color: var(--secondary); font-size: clamp(1.8rem, 4vw, 2.4rem);">Pendaftaran Ditutup</h1>
             <p style="font-size: 1.1rem; margin-bottom: 0; color: var(--text-muted);">
-              Maaf, pendaftaran untuk <strong style="color: var(--secondary);">DANLANAL Fun Run 2025</strong> saat ini sudah ditutup.
+              Maaf, pendaftaran untuk <strong style="color: var(--secondary);">DANLANAL KENDARI RUN 2025</strong> saat ini sudah ditutup.
             </p>
           </div>
 
@@ -76,7 +75,7 @@
 
     <footer>
       <div class="container">
-        <p>© {{ date('Y') }} DANLANAL Fun Run.</p>
+        <p>© {{ date('Y') }} DANLANAL KENDARI RUN 2025.</p>
       </div>
     </footer>
     <script src="{{ asset('assets/landing/script.js') }}" defer></script>

@@ -20,8 +20,7 @@ class RegistrationController extends Controller
 
         $validator = Validator::make($request->all(), [
             'category' => 'required|string',
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
+            'fullName' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'bibName' => 'required|string|max:16',
             'phone' => 'required|string|max:20',
@@ -39,7 +38,7 @@ class RegistrationController extends Controller
             'emergencyPhone' => 'required|string|max:20',
             'community' => 'nullable|string|max:255',
             'medicalNotes' => 'nullable|string',
-            'paymentType' => 'nullable|in:cash,transfer',
+            'province' => 'required|string|max:255',
             'paymentProof' => 'required|file|mimes:jpeg,jpg,png,pdf|max:10240', // 10MB
             'consent' => 'required|accepted',
         ]);
@@ -62,16 +61,16 @@ class RegistrationController extends Controller
         if ($request->has('birthPlace') && $request->birthPlace) {
             $additionalInfo['birth_place'] = $request->birthPlace;
         }
-        if ($request->has('paymentType') && $request->paymentType) {
-            $additionalInfo['payment_type'] = $request->paymentType;
-        }
         $adminNotes = !empty($additionalInfo) ? json_encode($additionalInfo) : null;
+
+        // Split full name into first and last name segments
+        [$firstName, $lastName] = $this->splitFullName($request->fullName);
 
         // Create registration
         $registration = Registration::create([
             'category' => $request->category,
-            'first_name' => $request->firstName,
-            'last_name' => $request->lastName,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => $request->email,
             'bib_name' => $request->bibName,
             'phone' => $request->phone,
@@ -82,6 +81,7 @@ class RegistrationController extends Controller
             'id_number' => $request->idNumber,
             'address' => $request->address,
             'city' => $request->city,
+            'province' => $request->province,
             'jersey_size' => $request->jerseySize,
             'blood_type' => $request->bloodType,
             'emergency_name' => $request->emergencyName,
@@ -95,6 +95,23 @@ class RegistrationController extends Controller
         ]);
 
         return redirect()->route('registration.success', ['id' => $registration->id]);
+    }
+
+    /**
+     * Split a full name into first and last name parts.
+     */
+    private function splitFullName(string $fullName): array
+    {
+        $fullName = trim(preg_replace('/\s+/', ' ', $fullName));
+        if ($fullName === '') {
+            return ['Peserta', 'Run'];
+        }
+
+        $parts = explode(' ', $fullName);
+        $firstName = array_shift($parts);
+        $lastName = !empty($parts) ? implode(' ', $parts) : $firstName;
+
+        return [$firstName, $lastName];
     }
 
     public function success($id)

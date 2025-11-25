@@ -3,22 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DANLANAL FUN RUN | Kategori 5K</title>
+    <title>DANLANAL KENDARI RUN 2025 | Kategori 5K</title>
     <link rel="icon" href="{{ asset('assets/lanal/logo-event/Logg4.png') }}" type="image/png" />
-    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/landing/style.css') }}?v=2.0" />
   </head>
   <body>
     <header>
       <div class="container nav">
         <a class="logo" href="/">
-          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL Fun Run" />
-          <span class="text-label">DANLANAL Fun Run</span>
+          <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL KENDARI RUN 2025" />
+          <span class="text-label">DANLANAL KENDARI RUN 2025</span>
         </a>
         <nav class="nav-links">
           <a href="/">Beranda</a>
-          <a href="{{ route('archive.category') }}">Kategori</a>
-          <a href="{{ route('archive.event-info') }}">Info Event</a>
-          <a href="{{ route('archive.gallery') }}">Galeri</a>
+          <a href="{{ route('archive.event-info') }}">Informasi Lomba</a>
           <a href="{{ route('archive.contact') }}">Kontak</a>
           <a class="btn btn-primary" href="{{ route('archive.register') }}">Daftar</a>
         </nav>
@@ -32,37 +30,19 @@
     <main class="section soft">
       <div class="container">
         <div class="section-header fade" data-delay="0.1">
-          <h2>Kategori Lari 5 Kilometer</h2>
-          <p>Kategori tunggal yang mengutamakan pengalaman lari premium dengan dukungan penuh dari prajurit TNI AL.</p>
+          <h2>Informasi Lomba</h2>
+          <p>Detail kategori kini bergabung dengan halaman Informasi Lomba untuk memudahkan Anda menemukan semua data penting.</p>
         </div>
-        <div class="cards-grid">
-          <article class="card fade" data-delay="0.15">
-            <h3>Detail Rute</h3>
-            <p>Rute start dari Gerbang Utama Lanal, melewati dermaga operasional dan berputar di area latihan marinir. Permukaan mulus dengan elevasi ringan.</p>
-          </article>
-          <article class="card fade" data-delay="0.25">
-            <h3>Benefit Finisher</h3>
-            <ul>
-              <li>• Jersey breathable eksklusif DANLANAL</li>
-              <li>• Medali logam brushed finish</li>
-              <li>• Goodie bag sponsor</li>
-              <li>• Akses zone pendinginan</li>
-            </ul>
-          </article>
-          <article class="card fade" data-delay="0.35">
-            <h3>Safety & Support</h3>
-            <p>Marshal militer di tiap persimpangan, hydration point tiap 1,5 km, dan tim medis lengkap.</p>
-          </article>
-        </div>
-        <div style="text-align:center;margin-top:3rem;">
-          <a class="btn btn-primary" href="{{ route('archive.register') }}">Menuju Pendaftaran</a>
+        <div class="card fade" data-delay="0.2" style="text-align:center;">
+          <p>Silakan lanjut ke halaman Informasi Lomba untuk melihat rute 5K, benefit finisher, dan ketentuan terbaru.</p>
+          <a class="btn btn-primary" href="{{ route('archive.event-info') }}">Buka Informasi Lomba</a>
         </div>
       </div>
     </main>
 
     <footer>
       <div class="container">
-        <p>© {{ date('Y') }} DANLANAL Fun Run.</p>
+        <p>© {{ date('Y') }} DANLANAL KENDARI RUN 2025.</p>
       </div>
     </footer>
     <script src="{{ asset('assets/landing/script.js') }}" defer></script>

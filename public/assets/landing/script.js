@@ -84,6 +84,25 @@ if (mobileToggle && navLinks) {
   });
 }
 
+// Toast helper
+const toastContainer = document.createElement('div');
+toastContainer.className = 'toast-container';
+document.body.appendChild(toastContainer);
+
+function showToast(message, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerText = message;
+  toastContainer.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add('visible'));
+
+  setTimeout(() => {
+    toast.classList.remove('visible');
+    toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+  }, 4000);
+}
+
 // Basic form validation on register page
 const registerForm = document.querySelector('#register-form');
 if (registerForm) {
@@ -104,12 +123,32 @@ if (registerForm) {
 
     if (!valid) {
       e.preventDefault();
-      alert('Mohon lengkapi seluruh data wajib.');
-    } else {
-      alert('Terima kasih! Pendaftaran Anda kami terima.');
+      showToast('Mohon lengkapi seluruh data wajib sebelum mengirim.', 'error');
+      return false;
     }
+
+    // Form will submit normally to Laravel route
+    // No need to prevent default, let it submit naturally
   });
 }
+
+// Prevent any alert() calls that might be triggered on register page
+// Override window.alert to suppress registration-related alerts
+(function() {
+  const originalAlert = window.alert;
+  window.alert = function(message) {
+    // Suppress registration success alerts
+    if (message && (
+      message.includes('Terima kasih') || 
+      message.includes('Pendaftaran Anda kami terima') ||
+      message.includes('pendaftaran berhasil')
+    )) {
+      return; // Suppress this alert
+    }
+    // Allow other alerts (errors, etc.)
+    return originalAlert.apply(window, arguments);
+  };
+})();
 
 // Parallax hero effect
 const heroVisual = document.querySelector('.hero-visual');
@@ -117,6 +156,57 @@ if (heroVisual) {
   window.addEventListener('scroll', () => {
     const offset = window.scrollY;
     heroVisual.style.transform = `translateY(${offset * 0.1}px)`;
+  });
+}
+
+// Global image lightbox
+const images = document.querySelectorAll('img:not([data-no-lightbox])');
+if (images.length) {
+  const lightboxOverlay = document.createElement('div');
+  lightboxOverlay.className = 'image-lightbox';
+  lightboxOverlay.innerHTML = `
+    <div class="image-lightbox__content">
+      <button class="image-lightbox__close" aria-label="Tutup gambar">&times;</button>
+      <img alt="Preview gambar" />
+      <p class="image-lightbox__caption"></p>
+    </div>
+  `;
+  document.body.appendChild(lightboxOverlay);
+
+  const lightboxImage = lightboxOverlay.querySelector('img');
+  const lightboxCaption = lightboxOverlay.querySelector('.image-lightbox__caption');
+  const closeButton = lightboxOverlay.querySelector('.image-lightbox__close');
+
+  function closeLightbox() {
+    lightboxOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function openLightbox(src, altText) {
+    lightboxImage.src = src;
+    lightboxCaption.textContent = altText || 'Preview gambar';
+    lightboxOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  images.forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      openLightbox(img.src, img.alt);
+    });
+  });
+
+  closeButton.addEventListener('click', closeLightbox);
+  lightboxOverlay.addEventListener('click', e => {
+    if (e.target === lightboxOverlay) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keyup', e => {
+    if (e.key === 'Escape' && lightboxOverlay.classList.contains('show')) {
+      closeLightbox();
+    }
   });
 }
 

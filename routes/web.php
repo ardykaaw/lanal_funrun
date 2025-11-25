@@ -61,7 +61,7 @@ if (app()->environment('local')) {
                 'last_name' => 'Kaaw',
                 'email' => 'ardykaaw26@gmail.com',
                 'category' => '5K - Kategori Umum',
-                'registration_number' => 'FR' . date('Y') . '00001',
+                'registration_number' => 'DNL' . date('Y') . '00001',
             ]);
         } else {
             // Override recipient for test without changing stored email
@@ -111,10 +111,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Registration routes
     Route::prefix('admin/registrations')->name('admin.registrations.')->group(function () {
         Route::get('/', [AdminRegistrationController::class, 'index'])->name('index');
-        Route::get('/export', [AdminRegistrationController::class, 'export'])->name('export');
         Route::get('/{id}', [AdminRegistrationController::class, 'show'])->name('show');
         Route::post('/{id}/approve', [AdminRegistrationController::class, 'approve'])->name('approve');
         Route::post('/{id}/reject', [AdminRegistrationController::class, 'reject'])->name('reject');
+        Route::get('/{registration}/payment-proof', [AdminRegistrationController::class, 'paymentProof'])->name('payment-proof');
     });
     
     // Admin Participant routes (only approved registrations)
@@ -128,5 +128,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('admin/settings')->name('admin.settings.')->group(function () {
         Route::get('/', [SettingsController::class, 'index'])->name('index');
         Route::post('/update-registration-status', [SettingsController::class, 'updateRegistrationStatus'])->name('update-registration-status');
+    });
+    
+    // Admin Barcode Scan routes
+    Route::prefix('admin/barcode-scan')->name('admin.barcode-scan.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\BarcodeScanController::class, 'index'])->name('index');
+        Route::post('/lookup', [\App\Http\Controllers\Admin\BarcodeScanController::class, 'lookup'])->name('lookup');
+        Route::post('/{id}/confirm-pickup', [\App\Http\Controllers\Admin\BarcodeScanController::class, 'confirmPickup'])->name('confirm-pickup');
     });
 });

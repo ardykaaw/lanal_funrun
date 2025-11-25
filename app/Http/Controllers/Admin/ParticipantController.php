@@ -78,7 +78,8 @@ class ParticipantController extends Controller
         $export = new ParticipantsExport($participants);
         $spreadsheet = $export->export();
 
-        $filename = 'Data_Peserta_Terkonfirmasi_DANLANAL_Fun_Run_' . date('Y-m-d_His') . '.xlsx';
+        $eventSlug = 'danlanal_kendari_run_2025';
+        $filename = 'Peserta_Terkonfirmasi_' . $eventSlug . '_' . date('Y-m-d_His') . '.xlsx';
 
         return new StreamedResponse(function() use ($spreadsheet, $filename) {
             $writer = new Xlsx($spreadsheet);

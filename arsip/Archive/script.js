@@ -99,9 +99,7 @@ if (registerForm) {
     if (!valid) {
       e.preventDefault();
       alert('Mohon lengkapi seluruh data wajib.');
-    } else {
-      alert('Terima kasih! Pendaftaran Anda kami terima.');
-    }
+    } 
   });
 }
 

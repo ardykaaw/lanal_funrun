@@ -1,4 +1,4 @@
-<ul class="navbar-nav px-1 dropdown-menu my-1 z-1">
+<ul class="navbar-nav px-1 dropdown-menu my-1">
     <a class="nav-link mb-1 {{ Request::is('dashboard') || Request::is('/') ? 'aktif' : '' }}" href="/dashboard">
         <!-- Download SVG icon from http://tabler.io/icons/icon/home -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -37,6 +37,22 @@
         </svg>
         <span class="ms-2 nav-link-title">
             Peserta
+        </span>
+    </a>
+    <a class="nav-link mb-1 {{ Request::is('admin/barcode-scan*') ? 'aktif' : '' }}" href="{{ route('admin.barcode-scan.index') }}">
+        <!-- Download SVG icon from http://tabler.io/icons/icon/qrcode -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+            <line x1="7" y1="8" x2="7" y2="16"></line>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="17" y1="8" x2="17" y2="16"></line>
+        </svg>
+        <span class="ms-2 nav-link-title">
+            Scan Barcode
         </span>
     </a>
     <a class="nav-link mb-1 {{ Request::is('admin/settings*') ? 'aktif' : '' }}" href="{{ route('admin.settings.index') }}">
