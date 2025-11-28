@@ -132,7 +132,6 @@
               <div class="info-row"><span>Nomor Telepon</span><strong>{{ $registration->phone }}</strong></div>
               <div class="info-row"><span>Tanggal Lahir</span><strong>{{ $registration->birth_date->format('d F Y') }}</strong></div>
               <div class="info-row"><span>Jenis Kelamin</span><strong>{{ $registration->gender }}</strong></div>
-              <div class="info-row"><span>Pekerjaan</span><strong>{{ $registration->occupation }}</strong></div>
             </div>
 
             <div class="glass-section">

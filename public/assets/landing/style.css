@@ -671,13 +671,16 @@ header {
 
 .countdown-label {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .countdown-grid {
@@ -1294,6 +1297,132 @@ footer {
 
   .btn {
     width: 100%;
+  }
+}
+
+/* Podium Prize Cards Styling */
+.podium-prizes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.podium-card {
+  display: flex;
+  align-items: stretch;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.podium-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.podium-banner {
+  background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+  color: #ffffff;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.25rem;
+  min-width: 22px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.podium-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.6rem;
+  gap: 0.5rem;
+}
+
+.podium-rank {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  letter-spacing: 0.01em;
+}
+
+.podium-amount {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Gradient backgrounds for each rank */
+.podium-1 {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+}
+
+.podium-2 {
+  background: linear-gradient(135deg, #F5F5DC 0%, #E6E6D4 100%);
+}
+
+.podium-3 {
+  background: linear-gradient(135deg, #D2B48C 0%, #C19A6B 100%);
+}
+
+.podium-4 {
+  background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
+}
+
+.podium-5 {
+  background: linear-gradient(135deg, #D3D3D3 0%, #A9A9A9 100%);
+}
+
+@media (max-width: 768px) {
+  .podium-content {
+    padding: 0.4rem 0.55rem;
+    gap: 0.5rem;
+  }
+
+  .podium-rank {
+    font-size: 0.7rem;
+  }
+
+  .podium-amount {
+    font-size: 0.8rem;
+  }
+
+  .podium-banner {
+    min-width: 20px;
+    padding: 0.4rem 0.22rem;
+    font-size: 0.48rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .podium-content {
+    padding: 0.35rem 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .podium-rank {
+    font-size: 0.65rem;
+  }
+
+  .podium-amount {
+    font-size: 0.75rem;
+  }
+
+  .podium-banner {
+    min-width: 18px;
+    padding: 0.35rem 0.2rem;
+    font-size: 0.45rem;
   }
 }
 

@@ -75,12 +75,6 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Pekerjaan</label>
-                                        <div class="form-control-plaintext">{{ $registration->occupation }}</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
                                         <label class="form-label">Kategori</label>
                                         <div class="form-control-plaintext">
                                             <span class="badge bg-primary text-white">{{ $registration->category }}</span>

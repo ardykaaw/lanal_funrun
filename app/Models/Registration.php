@@ -17,7 +17,6 @@ class Registration extends Model
         'phone',
         'birth_date',
         'gender',
-        'occupation',
         'id_type',
         'id_number',
         'address',
@@ -49,23 +48,23 @@ class Registration extends Model
 
     /**
      * Generate unique registration number
-     * Format: DNL5001, DNL5002, etc.
+     * Format: DNL5501, DNL5502, etc.
      */
     public static function generateRegistrationNumber(): string
     {
-        // Get the highest existing registration number with new format (DNL5xxx)
-        $lastRegistration = self::where('registration_number', 'like', 'DNL5%')
-            ->whereRaw('LENGTH(registration_number) >= 7') // At least DNL5001 (7 chars)
+        // Get the highest existing registration number with new format (DNL55xx)
+        $lastRegistration = self::where('registration_number', 'like', 'DNL55%')
+            ->whereRaw('LENGTH(registration_number) >= 7') // At least DNL5501 (7 chars)
             ->orderByRaw('CAST(SUBSTRING(registration_number, 4) AS UNSIGNED) DESC')
             ->first();
         
-        if ($lastRegistration && preg_match('/^DNL5(\d+)$/', $lastRegistration->registration_number, $matches)) {
+        if ($lastRegistration && preg_match('/^DNL55(\d+)$/', $lastRegistration->registration_number, $matches)) {
             $lastNumber = (int) $matches[1];
-            // Ensure we start from at least 5001
-            $nextNumber = max(5001, $lastNumber + 1);
+            // Ensure we start from at least 5501
+            $nextNumber = max(5501, $lastNumber + 1);
         } else {
-            // No existing new format, start from 5001
-            $nextNumber = 5001;
+            // No existing new format, start from 5501
+            $nextNumber = 5501;
         }
         
         $number = 'DNL' . $nextNumber;

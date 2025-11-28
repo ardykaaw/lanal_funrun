@@ -82,7 +82,7 @@ class ParticipantsExport
         $headers = [
             'No', 'No. Pendaftaran', 'Nama Depan', 'Nama Belakang', 'Nama di BIB',
             'Email', 'Telepon / WA', 'Tempat Lahir', 'Tanggal Lahir', 'Jenis Kelamin',
-            'Pekerjaan', 'Jenis Identitas', 'Nomor Identitas', 'Alamat', 'Kota', 'Provinsi',
+            'Jenis Identitas', 'Nomor Identitas', 'Alamat', 'Kota', 'Provinsi',
             'Ukuran Jersey', 'Golongan Darah', 'Kategori', 'Nama Kontak Darurat',
             'Telepon Kontak Darurat', 'Komunitas', 'Catatan Medis', 'Tanggal Disetujui'
         ];
@@ -141,7 +141,6 @@ class ParticipantsExport
                 $birthPlace,
                 $participant->birth_date ? $participant->birth_date->format('d/m/Y') : '-',
                 $participant->gender,
-                $participant->occupation,
                 $participant->id_type,
                 $participant->id_number,
                 $participant->address,

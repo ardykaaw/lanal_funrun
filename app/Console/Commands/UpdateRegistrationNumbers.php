@@ -20,7 +20,7 @@ class UpdateRegistrationNumbers extends Command
      *
      * @var string
      */
-    protected $description = 'Update registration numbers to new format (DNL5001, DNL5002, etc.)';
+    protected $description = 'Update registration numbers to new format (DNL5501, DNL5502, etc.)';
 
     /**
      * Execute the console command.

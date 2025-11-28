@@ -71,10 +71,10 @@ class RegistrationController extends Controller
         ]);
 
         // Generate registration number if not exists or if it's old format
-        // New format: DNL5001, DNL5002, etc. (DNL5 followed by 3+ digits)
+        // New format: DNL5501, DNL5502, etc. (DNL55 followed by 2+ digits)
         if (!$registration->registration_number || 
-            !preg_match('/^DNL5\d{3,}$/', $registration->registration_number)) {
-            // Check if it's old format (DNL2025xxxxx) or doesn't exist
+            !preg_match('/^DNL55\d{2,}$/', $registration->registration_number)) {
+            // Check if it's old format (DNL2025xxxxx or DNL5xxx) or doesn't exist
             $registration->registration_number = Registration::generateRegistrationNumber();
         }
 

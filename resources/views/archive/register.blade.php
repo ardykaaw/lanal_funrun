@@ -79,10 +79,6 @@
                 </select>
               </label>
               <label>
-                Pekerjaan
-                <input type="text" name="occupation" required />
-              </label>
-              <label>
                 Jenis Identitas
                 <select name="idType" required>
                   <option value="">Pilih</option>

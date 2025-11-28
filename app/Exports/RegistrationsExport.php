@@ -42,7 +42,7 @@ class RegistrationsExport
         // Header section
         $row = 5;
         $sheet->setCellValue('A' . $row, 'DATA PESERTA DANLANAL KENDARI RUN 2025');
-        $sheet->mergeCells('A' . $row . ':P' . $row);
+        $sheet->mergeCells('A' . $row . ':Y' . $row);
         $sheet->getStyle('A' . $row)->applyFromArray([
             'font' => [
                 'bold' => true,
@@ -57,7 +57,7 @@ class RegistrationsExport
 
         $row++;
         $sheet->setCellValue('A' . $row, 'Tanggal Export: ' . date('d F Y H:i:s'));
-        $sheet->mergeCells('A' . $row . ':P' . $row);
+        $sheet->mergeCells('A' . $row . ':Y' . $row);
         $sheet->getStyle('A' . $row)->applyFromArray([
             'font' => ['size' => 10],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
@@ -68,7 +68,7 @@ class RegistrationsExport
         $headers = [
             'No', 'No. Pendaftaran', 'Nama Depan', 'Nama Belakang', 'Nama di BIB',
             'Email', 'Telepon / WA', 'Tempat Lahir', 'Tanggal Lahir', 'Jenis Kelamin',
-            'Pekerjaan', 'Jenis Identitas', 'Nomor Identitas', 'Alamat', 'Kota', 'Provinsi',
+            'Jenis Identitas', 'Nomor Identitas', 'Alamat', 'Kota', 'Provinsi',
             'Ukuran Jersey', 'Golongan Darah', 'Kategori', 'Status', 'Status Pembayaran',
             'Nama Kontak Darurat', 'Telepon Kontak Darurat', 'Komunitas', 'Catatan Medis', 'Tanggal Daftar'
         ];
@@ -102,7 +102,7 @@ class RegistrationsExport
         }
 
         // Set column widths
-        $widths = [5, 15, 15, 15, 12, 25, 18, 15, 12, 12, 15, 12, 15, 30, 15, 15, 10, 10, 15, 12, 15, 20, 15, 20, 30, 18];
+        $widths = [5, 15, 15, 15, 12, 25, 18, 15, 12, 12, 12, 15, 30, 15, 15, 10, 10, 15, 12, 15, 20, 15, 20, 30, 18];
         $col = 'A';
         foreach ($widths as $width) {
             $sheet->getColumnDimension($col)->setWidth($width);
@@ -127,7 +127,6 @@ class RegistrationsExport
                 $birthPlace,
                 $registration->birth_date ? $registration->birth_date->format('d/m/Y') : '-',
                 $registration->gender,
-                $registration->occupation,
                 $registration->id_type,
                 $registration->id_number,
                 $registration->address,

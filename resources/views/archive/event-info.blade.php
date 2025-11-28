@@ -63,12 +63,13 @@
               <p>Jelajahi MAKO LANAL Kendari dengan jalur aman, permukaan mulus, dan view armada laut yang jarang dibuka untuk publik.</p>
             </article>
             <article class="card fade" data-delay="0.2">
-              <h3>Benefit Finisher</h3>
+              <h3>Benefit </h3>
               <ul>
-                <li>• Jersey breathable eksklusif</li>
-                <li>• Medali logam brushed finish</li>
-                <li>• Goodie bag sponsor & refreshment</li>
-                <li>• Akses zone pendinginan</li>
+                <li>• BIB</li>
+                <li>• Jersey</li>
+                <li>• Medali Finisher</li>
+                <li>• Goodie Bag</li>
+                <li>• Refreshment</li>
               </ul>
             </article>
           </div>

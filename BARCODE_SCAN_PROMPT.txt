@@ -1,0 +1,111 @@
+IMPLEMENTASI FITUR BARCODE SCAN UNTUK EVENT REGISTRATION SYSTEM
+
+Buat fitur barcode scan lengkap untuk sistem pendaftaran event dengan spesifikasi berikut:
+
+1. INSTALASI DEPENDENCIES
+- Install package QR Code: `composer require simplesoftwareio/simple-qrcode`
+- Pastikan storage link sudah dibuat: `php artisan storage:link`
+
+2. DATABASE MIGRATION
+- Tambahkan kolom ke tabel `registrations`:
+  * `barcode` (string, nullable) - menyimpan path file QR code
+  * `race_pack_picked_up` (boolean, default false) - status pengambilan race pack
+  * `race_pack_picked_up_at` (timestamp, nullable) - waktu pengambilan race pack
+- Update model Registration: tambahkan field tersebut ke $fillable dan $casts
+
+3. REGISTRATION NUMBER FORMAT
+- Format nomor pendaftaran: DNL5001, DNL5002, DNL5003, dst (dimulai dari DNL5001)
+- Buat method static `generateRegistrationNumber()` di model Registration yang:
+  * Mencari nomor terakhir dengan format DNL5xxx
+  * Increment nomor berikutnya
+  * Pastikan unique, mulai dari DNL5001 jika belum ada
+
+4. BARCODE SERVICE
+- Buat service class `App\Services\BarcodeService` dengan method:
+  * `generateBarcode($data, $filename)` - generate QR code dan simpan ke storage/public/barcodes, return path
+  * `generateBarcodeBase64($data)` - generate QR code sebagai base64 untuk inline use
+  * `generateBarcodeBase64Static($data)` - static method untuk Blade templates dengan retry logic
+- QR code berisi registration_number
+- Format: PNG, size 300px, margin 2, error correction H
+- Simpan di folder storage/app/public/barcodes/
+
+5. AUTO GENERATE BARCODE SAAT APPROVAL
+- Di controller Admin RegistrationController, method `approve()`:
+  * Generate registration number baru jika belum ada atau format lama (bukan DNL5xxx)
+  * Generate barcode QR code jika belum ada
+  * Simpan path barcode ke field `barcode`
+  * Kirim email approval yang sudah include QR code
+
+6. EMAIL APPROVAL DENGAN QR CODE
+- Update `App\Mail\RegistrationApprovedMail`:
+  * Di constructor, generate QR code dan simpan ke storage
+  * Di method `build()`, embed QR code menggunakan `$message->embedData()` dengan content file QR code
+  * Tambahkan fallback message jika QR code tidak bisa ditampilkan
+- Update view email `resources/views/emails/registration_approved.blade.php`:
+  * Tampilkan QR code yang di-embed
+  * Tambahkan informasi waktu dan lokasi pengambilan race pack (20 Desember 2025, 10.00 - 17.00 WITA, Aula Lanal Kendari)
+
+7. QR CODE DI HALAMAN DETAIL REGISTRASI
+- Di view `resources/views/archive/registration-detail.blade.php`:
+  * Tampilkan QR code menggunakan `BarcodeService::generateBarcodeBase64Static($registration->registration_number)`
+  * QR code ditampilkan sebagai gambar inline dengan styling liquid glass
+
+8. ADMIN BARCODE SCAN PAGE
+- Buat controller `App\Http\Controllers\Admin\BarcodeScanController` dengan method:
+  * `index()` - tampilkan halaman scan dan list peserta yang sudah mengambil race pack (50 terakhir, urut terbaru)
+  * `lookup($request)` - cari registration berdasarkan barcode/registration_number, return JSON
+  * `confirmPickup($request, $id)` - update status race_pack_picked_up dan race_pack_picked_up_at (timezone Asia/Makassar/WITA)
+- Buat view `resources/views/admin/barcode-scan/index.blade.php` dengan:
+  * Input field untuk scan manual atau ketik registration number
+  * HTML5 QR Code Scanner menggunakan library `html5-qrcode` (CDN: https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js)
+  * Tombol untuk start/stop scanner
+  * Tombol flip camera (depan/belakang) - gunakan facingMode: "environment" (back) dan "user" (front)
+  * Display detail registration saat berhasil scan
+  * Tombol "Konfirmasi Race Pack Diambil" dengan Bootstrap Modal untuk konfirmasi
+  * Tabel list peserta yang sudah mengambil race pack (50 terakhir) dengan kolom: No, Nomor Pendaftaran, Nama, Kategori, Waktu Pengambilan
+  * Toast notification untuk success/error messages
+  * Pastikan navbar-toggler bisa diklik di mobile (z-index 1060, pointer-events auto)
+
+9. ROUTES
+- Tambahkan routes di `routes/web.php` dalam middleware auth + role:admin:
+  * GET `/admin/barcode-scan` - halaman scan
+  * POST `/admin/barcode-scan/lookup` - lookup registration
+  * POST `/admin/barcode-scan/{id}/confirm-pickup` - konfirmasi pickup
+
+10. NAVIGATION MENU
+- Tambahkan link "Scan Barcode" di admin sidebar navigation yang mengarah ke `/admin/barcode-scan`
+
+11. TIMEZONE
+- Pastikan config/app.php timezone: `'timezone' => 'Asia/Makassar'`
+- Format waktu pickup di tampilkan dengan format: "d F Y H:i WITA"
+
+12. STYLING & UX
+- Gunakan Bootstrap 5.3.0 untuk modal dan toast
+- Modal konfirmasi pickup harus profesional dengan:
+  * Icon checkmark
+  * Judul "Konfirmasi Pengambilan Race Pack"
+  * Pesan konfirmasi yang jelas
+  * Alert info tentang tidak bisa diubah setelah dikonfirmasi
+  * Tombol Batal dan Konfirmasi
+- Pastikan semua elemen bisa diklik di mobile view
+- QR code scanner harus responsive
+
+13. VALIDATION & ERROR HANDLING
+- Validasi registration number format saat lookup
+- Handle error jika QR code generation gagal (log error, return empty string)
+- Handle error jika camera tidak bisa diakses
+- Tampilkan error message yang user-friendly
+
+14. FEATURES YANG HARUS ADA
+- Scan QR code via camera (HTML5)
+- Input manual registration number
+- Flip camera (depan/belakang)
+- Konfirmasi pickup dengan modal profesional
+- List peserta yang sudah pickup (50 terakhir)
+- Real-time update setelah konfirmasi
+- Toast notifications
+- Responsive design
+- Mobile-friendly
+
+Pastikan semua fitur bekerja dengan baik dan konsisten dengan styling yang sudah ada di project.
+

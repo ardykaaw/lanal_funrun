@@ -38,8 +38,8 @@
             </div>
             <div class="countdown-card">
               <div class="countdown-label">
-                <span>Hitung Mundur</span>
-                <span>Menuju Flag Off</span>
+                
+                <span>Race Day</span>
               </div>
               <div id="countdown" class="countdown-grid"></div>
             </div>
@@ -60,7 +60,7 @@
             <div class="hero-prize-card">
               <span>Total Prize Pool</span>
               <strong>Rp150.000.000</strong>
-              <p>Hadiah podium & door prize premium untuk seluruh peserta.</p>
+              <p>Hadiah Podium untuk Pelari Tercepat serta Doorprize untuk Peserta yang beruntung.</p>
             </div>
             <div class="cta-group">
               <a class="btn btn-primary" href="{{ route('archive.register') }}">Daftar Sekarang</a>
@@ -77,7 +77,7 @@
           <div class="promo-text">
             <p class="text-logo">
               <img src="{{ asset('assets/lanal/logo-event/Logg4.png') }}" alt="Logo DANLANAL KENDARI RUN 2025" />
-              Door Prize Spektakuler
+              DOOR PRIZE SPEKTAKULER
             </p>
             <h3>Hadiah untuk Semua Peserta</h3>
             <p>Rayakan finish Anda dengan deretan door prize spesial dari DANLANAL KENDARI RUN 2025. Semua peserta berkesempatan membawa pulang hadiah utama.</p>
@@ -100,17 +100,47 @@
           <div class="promo-text">
             <p class="text-logo">
               <img src="{{ asset('assets/lanal/logo-event/image.png') }}" alt="Runner Logo" />
-              Podium Prize 5K
+              PODIUM PRIZE 5K
             </p>
-            <h3>Hadiah Tunai untuk Juara Male & Female</h3>
-            <p>Hadiah podium Rp5.000.000 dengan trophy eksklusif. Berlomba cepat, tampil terbaik.</p>
-            <ul>
-              <li>Juara 1 Rp5.000.000 + Trophy</li>
-              <li>Juara 2 Rp3.000.000</li>
-              <li>Juara 3 Rp2.000.000</li>
-              <li>Juara 4 Rp1.000.000</li>
-              <li>Juara 5 Rp500.000</li>
-            </ul>
+            <h3>Hadiah Tunai untuk Podium Male & Female</h3>
+            
+            <div class="podium-prizes">
+              <div class="podium-card podium-1">
+                <div class="podium-banner">TUNAI</div>
+                <div class="podium-content">
+                  <div class="podium-rank">JUARA 1</div>
+                  <div class="podium-amount">10.000.000</div>
+                </div>
+              </div>
+              <div class="podium-card podium-2">
+                <div class="podium-banner">TUNAI</div>
+                <div class="podium-content">
+                  <div class="podium-rank">JUARA 2</div>
+                  <div class="podium-amount">7.500.000</div>
+                </div>
+              </div>
+              <div class="podium-card podium-3">
+                <div class="podium-banner">TUNAI</div>
+                <div class="podium-content">
+                  <div class="podium-rank">JUARA 3</div>
+                  <div class="podium-amount">5.000.000</div>
+                </div>
+              </div>
+              <div class="podium-card podium-4">
+                <div class="podium-banner">TUNAI</div>
+                <div class="podium-content">
+                  <div class="podium-rank">JUARA 4</div>
+                  <div class="podium-amount">1.000.000</div>
+                </div>
+              </div>
+              <div class="podium-card podium-5">
+                <div class="podium-banner">TUNAI</div>
+                <div class="podium-content">
+                  <div class="podium-rank">JUARA 5</div>
+                  <div class="podium-amount">500.000</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="promo-visual">
             <img src="{{ asset('assets/lanal/005-Podium-Website-1440x1080.jpg') }}" alt="Podium Prize DANLANAL Kendari" loading="lazy" />
