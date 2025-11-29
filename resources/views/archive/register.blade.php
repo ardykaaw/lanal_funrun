@@ -160,6 +160,9 @@
               <p class="muted">Lakukan pembayaran Rp250.000 ke rekening berikut dan unggah bukti pembayaran.</p>
               <p style="font-weight:700;">Mandiri · 0310055511144
                 a.n. Endro Pamungkas</p>
+              <div style="margin-top: 1rem; text-align: center;">
+                <img src="{{ asset('assets/lanal/qris.jpeg') }}" alt="QRIS Pembayaran DANLANAL KENDARI RUN 2025" style="max-width: 100%; height: auto; border-radius: 8px;" />
+              </div>
             </div>
 
             <label>

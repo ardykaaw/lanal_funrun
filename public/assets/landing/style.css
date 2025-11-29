@@ -1324,10 +1324,9 @@ footer {
 }
 
 .podium-banner {
+  background: #FFD700; /* Fallback for browsers without gradient support */
   background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
   color: #ffffff;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1337,6 +1336,27 @@ footer {
   padding: 0.4rem 0.25rem;
   min-width: 22px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* Vertical text using transform for better compatibility */
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  text-orientation: mixed;
+  -webkit-text-orientation: mixed;
+  /* Fallback: if writing-mode not supported, use transform */
+}
+
+/* Fallback for browsers that don't support writing-mode */
+@supports not (writing-mode: vertical-rl) {
+  .podium-banner {
+    writing-mode: initial;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    white-space: nowrap;
+    width: auto;
+    height: 22px;
+    min-width: 22px;
+    padding: 0.25rem 0.4rem;
+  }
 }
 
 .podium-content {
@@ -1363,24 +1383,29 @@ footer {
   letter-spacing: -0.01em;
 }
 
-/* Gradient backgrounds for each rank */
+/* Gradient backgrounds for each rank with fallbacks */
 .podium-1 {
+  background: #FFF8E1; /* Fallback */
   background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
 }
 
 .podium-2 {
+  background: #F5F5DC; /* Fallback */
   background: linear-gradient(135deg, #F5F5DC 0%, #E6E6D4 100%);
 }
 
 .podium-3 {
+  background: #D2B48C; /* Fallback */
   background: linear-gradient(135deg, #D2B48C 0%, #C19A6B 100%);
 }
 
 .podium-4 {
+  background: #E0E0E0; /* Fallback */
   background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
 }
 
 .podium-5 {
+  background: #D3D3D3; /* Fallback */
   background: linear-gradient(135deg, #D3D3D3 0%, #A9A9A9 100%);
 }
 
