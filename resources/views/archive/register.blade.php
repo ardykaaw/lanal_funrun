@@ -40,7 +40,7 @@
               <label>
                 Kategori Lari
                 <select name="category" required>
-                  <option value="5K - Kategori Umum" selected>5K - Kategori Umum</option>
+                  <option value="5K - Presale" selected>5K - Presale</option>
                 </select>
               </label>
               <label class="full-width">
@@ -157,7 +157,7 @@
 
             <div class="card">
               <h3>Konfirmasi Pembayaran</h3>
-              <p class="muted">Lakukan pembayaran Rp250.000 ke rekening berikut dan unggah bukti pembayaran.</p>
+              <p class="muted">Lakukan pembayaran Rp199.000 ke rekening berikut dan unggah bukti pembayaran.</p>
               <p style="font-weight:700;">Mandiri · 0310055511144
                 a.n. Endro Pamungkas</p>
               <div style="margin-top: 1rem; text-align: center;">
@@ -183,7 +183,7 @@
 
         <aside class="card">
           <h3>Biaya Registrasi</h3>
-          <p class="price-tag">Rp250.000</p>
+          <p class="price-tag">Rp199.000</p>
             <p>Termasuk Jersey, BIB, Totebag, Medali Finisher, Refreshment, dan Kupon Doorprize.</p>
             
           <div class="size-chart-card">
