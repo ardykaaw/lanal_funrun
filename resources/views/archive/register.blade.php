@@ -41,6 +41,7 @@
                 Kategori Lari
                 <select name="category" required>
                   <option value="5K - Presale" selected>5K - Presale</option>
+                  <option value="5K - Umum" disabled>5K - Umum</option>
                 </select>
               </label>
               <label class="full-width">
@@ -69,6 +70,10 @@
               <label>
                 Tanggal Lahir
                 <input type="date" name="birthDate" required />
+              </label>
+              <label>
+                Pekerjaan
+                <input type="text" name="occupation" required placeholder="Contoh: PNS, Swasta, Mahasiswa" />
               </label>
               <label>
                 Jenis Kelamin
@@ -161,7 +166,7 @@
               <p style="font-weight:700;">Mandiri · 0310055511144
                 a.n. Endro Pamungkas</p>
               <div style="margin-top: 1rem; text-align: center;">
-                <img src="{{ asset('assets/lanal/qris.jpeg') }}" alt="QRIS Pembayaran DANLANAL KENDARI RUN 2025" style="max-width: 100%; height: auto; border-radius: 8px;" />
+                <img src="{{ asset('assets/lanal/qris1.jpeg') }}" alt="QRIS Pembayaran DANLANAL KENDARI RUN 2025" style="max-width: 100%; height: auto; border-radius: 8px;" />
               </div>
             </div>
 
@@ -183,7 +188,12 @@
 
         <aside class="card">
           <h3>Biaya Registrasi</h3>
-          <p class="price-tag">Rp199.000</p>
+          <div style="margin-bottom: 1rem;">
+            <p style="margin: 0; text-decoration: line-through; color: var(--text-muted); font-size: 1.1rem;">
+              Rp250.000
+            </p>
+            <p class="price-tag" style="margin: 0.5rem 0 0 0; color: var(--secondary);">Rp199.000</p>
+          </div>
             <p>Termasuk Jersey, BIB, Totebag, Medali Finisher, Refreshment, dan Kupon Doorprize.</p>
             
           <div class="size-chart-card">

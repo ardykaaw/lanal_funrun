@@ -53,9 +53,10 @@
           <div class="section-header" style="text-align:left;">
             <h2 style="margin-bottom:0.1rem;">Kategori Lari</h2>
             <ul style="margin-bottom:0.1rem; margin-top:0;">
-              <li><strong>5K - UMUM</strong>
+              <li><strong>5K - Presale</strong> - Rp199.000</li>
+              <li><strong>5K - Umum</strong> - Rp250.000</li>
             </ul>
-            <p>Satu kategori, kualitas maksimal. Fokus untuk performa terbaik Anda.</p>
+            <p>Dua pilihan kategori dengan kualitas maksimal. Fokus untuk performa terbaik Anda.</p>
           </div>
           <div class="cards-grid">
             <article class="card fade" data-delay="0.1">

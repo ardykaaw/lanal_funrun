@@ -16,6 +16,7 @@ class Registration extends Model
         'bib_name',
         'phone',
         'birth_date',
+        'occupation',
         'gender',
         'id_type',
         'id_number',
