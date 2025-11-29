@@ -88,8 +88,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         $pendingPayments = $registrations->where('payment_status', 'pending')->count();
         $todayRegistrations = $registrations->where('created_at', '>=', today())->count();
         
-        // Calculate total revenue (assuming 200000 per registration)
-        $totalRevenue = $verifiedPayments * 200000;
+        // Calculate total revenue based on category
+        $totalRevenue = $registrations
+            ->where('payment_status', 'verified')
+            ->sum(function ($registration) {
+                // 5K - Presale = Rp199.000
+                // 5K - Umum = Rp250.000
+                if ($registration->category === '5K - Presale') {
+                    return 199000;
+                } elseif ($registration->category === '5K - Umum') {
+                    return 250000;
+                }
+                // Default fallback (shouldn't happen, but just in case)
+                return 199000;
+            });
         
         return view('welcome', compact(
             'totalRegistrations',
