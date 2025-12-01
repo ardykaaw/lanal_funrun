@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="hero-visual fade" aria-hidden="true">
-            <img src="{{ asset('assets/lanal/logo-event/image.png') }}" alt="Total Prize Pool DANLANAL KENDARI RUN 2025" />
+            <img src="{{ asset('assets/lanal/004-Post-Full-Prize-1440x1080.jpg') }}" alt="Total Prize Pool DANLANAL KENDARI RUN 2025" />
           </div>
         </div>
       </section>
@@ -89,7 +89,7 @@
             <p>#HariArmadaRI2025 #DanlanalKendari</p>
           </div>
           <div class="promo-visual">
-            <img src="{{ asset('assets/lanal/004-Post-Full-Prize-1440x1080.jpg') }}" alt="Doorprize DANLANAL KENDARI RUN 2025" loading="lazy" />
+            <img src="{{ asset('assets/lanal/005-Doorprize-Website-1440x1080.jpg') }}" alt="Doorprize DANLANAL KENDARI RUN 2025" loading="lazy" />
           </div>
         </div>
       </section>
